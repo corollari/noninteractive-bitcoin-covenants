@@ -48,7 +48,7 @@ Furthermore, it also enables the following applications (these would also be pos
 - Scripts with unbounded length (including arbitraryly sized multisigs)
 - Arbitrary state machines (+solves the problem of gas bc it requires several transactions)
 - Transaction-level MAST (a really coarse-grained version of MAST that would split code paths at the script/transaction level)
-- Drivechains (although it would only let the sidechain send the locked coins to an address contained in a set of addresses that would have to be defined when creating the script, that is, it won't be able to spend the drivechain funds to arbitrary addresses)
+- Drivechains (although it would only let the sidechain send the locked coins to an address contained in a set of addresses that would have to be defined when creating the script, that is, it won't be able to spend the drivechain funds to arbitrary addresses, also the number of possible forward and backward steps would need to be artificially capped)
 
 ## Deployment
 This proposal can be applied directly and does not require any change on the Bitcoin protocol nor the node software.
