@@ -33,7 +33,7 @@ Now, solving this equation would require generating hash pre-images, which shoul
 Due to this problem, the whole scheme is impossible to implement and would require the existence of something like OP_NOINPUT in order to be practical.
 
 ### Fees
-A basic problem with this design is the fact that . Nevertheless it can be solved through:
+A basic problem with this design is the fact that only a single uique transaction can spend the UTXO, therefore the fees used on that transaction are locked and cannot be changed afterwards. Nevertheless it can be solved through:
 - **Child Pays for Parent**
 - **Several transactions with different fees**
 
