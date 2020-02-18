@@ -9,8 +9,7 @@ To improve explainability, we will start by describing this proposal in the cont
 
 ### Schnorr
 Given a curve €C€, a generator point €G in C€, a private key €p€ and a nonce €k€, the public key €P in C€ is usually computed as €P=pG€ and, given a message €m€ a signature for it is created by computing €K=kG, s = k-hash(m, K)*p€ and constructing €(s, K, m)€, which along with €P€ enables the verification of the signature.
-The construction described allows the owner of Instead of constructing the signature in this way, this proposal uses the following algorithm:
-Given a transaction input  
+The construction described allows anyone with knowledge of €p€ to create a signature of €P€. But, instead of constructing a signature in this traditional way, this proposal uses the following algorithm:  
 1. Construct a transaction 
 2. Compute a definition of €s in ZZ_p€ and €K in C€ in a deterministic way from the message, for example using €s=hash1(m), K=hash2(m)€ (€hash2€ should return a valid point in €C€)
 3. Compute €P€ by solving the equation €sG = K-hash(m, K)*P€
