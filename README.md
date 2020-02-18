@@ -2,7 +2,7 @@
 
 ## Abstract
 This proposal outlines a protocol for the creation of Bitcoin script conditions that restrict a UTXO to be spent to only a spefific address.
-This is done through the creation of a public key for which only a valid signature exists
+This is done through the creation of a public key for which only a valid signature exists.
 
 ## Design
 To improve explainability, we will start by describing this proposal in the context of Schnorr signatures and will later explain how it can be ported to ECDSA:
@@ -16,7 +16,7 @@ Given a transaction input
 3. Compute €P€ by solving the equation €sG = K-hash(m, K)*P€
 
 ### ECDSA
-TODO
+The same scheme can be applied to ECDSA using any of several ECDSA recovery implementations, such as the `ecrecover` opcode that is part of the EVM.
 
 ## THE Problem
 There is a circular dependency between the transaction hash of the transaction that will initially move the funds to the address and the public key that is to be computed. This is caused by the fact that to compute the initial transaction we need to know the scriptPubKey where the funds should be sent, and that is constructed using the computed public key, yet to compute that key we need to know the hash of the transaction that should be signed (the transaction that would spend the fund from the address) and such a transaction is constructed using the txid of the transaction that initially send the funds, thus:
@@ -28,14 +28,14 @@ Where f_1, f_2 and f_3 are invertible functions.
 Therefore, creating a PubKey or InitialTransaction that has the properties needed requires solving the following equation:
 InitialTransaction = f_3(f_1(hash(f_2(hash(InitialTransaction)))))
 
-Now this solving this equation would require generating hash pre-images, which should be impractical due to the computation expenses.
+Now, solving this equation would require generating hash pre-images, which should be impractical due to the computation expenses.
 
 Due to this problem, the whole scheme is impossible to implement and would require the existence of something like OP_NOINPUT in order to be practical.
 
 ### Fees
 A basic problem with this design is the fact that . Nevertheless it can be solved through:
-- **Child Pays for Parent**: 
-- **Several transactions with different fees**: 
+- **Child Pays for Parent**
+- **Several transactions with different fees**
 
 ## Applications
 This solution would enable the applications described in the [`OP_CHECKOUTPUTSHASHVERIFY` BIP](https://github.com/JeremyRubin/bips/blob/op-checkoutputshashverify/bip-coshv.mediawiki):
